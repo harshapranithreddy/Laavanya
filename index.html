@@ -1,1 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Laavanya ♥</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
+:root{
+  --rose:#c9606e;
+  --rose-dim:rgba(201,96,110,0.15);
+  --rose-glow:rgba(201,96,110,0.35);
+  --cream:#f8ede8;
+  --dark:#090507;
+  --dark2:#110a0d;
+  --text:rgba(248,237,232,0.88);
+  --muted:rgba(248,237,232,0.38);
+  --gold:#c9a96e;
+}
+
+html{scroll-behavior:smooth;background:var(--dark);}
+body{
+  background:var(--dark);
+  color:var(--text);
+  font-family:'Jost',sans-serif;
+  font-weight:300;
+  overflow-x:hidden;
+  line-height:1.7;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--dark)}
+::-webkit-scrollbar-thumb{background:var(--rose);border-radius:2px}
+
+/* ── FIXED NAV PROGRESS ── */
+#progress-bar{
+  position:fixed;top:0;left:0;height:2px;
+  background:linear-gradient(to right,var(--rose),var(--gold));
+  z-index:1000;width:0%;transition:width 0.1s linear;
+}
+
+#top-nav{
+  position:fixed;top:0;left:0;right:0;
+  padding:1.2rem 2rem;
+  display:flex;justify-content:space-between;align-items:center;
+  z-index:999;
+  background:linear-gradient(to bottom,rgba(9,5,7,0.9),transparent);
+  pointer-events:none;
+}
+#top-nav .logo{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:1.1rem;
+  color:rgba(248,237,232,0.4);
+  letter-spacing:0.05em;
+}
+#top-nav .chapter-label{
+  font-size:0.6rem;letter-spacing:0.35em;
+  text-transform:uppercase;color:rgba(248,237,232,0.25);
+  transition:color 0.4s;
+}
+
+/* ── GRAIN ── */
+.grain{
+  position:fixed;inset:0;z-index:2;pointer-events:none;
+  opacity:0.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:180px;
+  animation:grain 0.4s steps(2) infinite;
+}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-2px,2px)}50%{transform:translate(2px,-1px)}75%{transform:translate(-1px,3px)}100%{transform:translate(2px,-2px)}}
+
+/* ── SECTIONS ── */
+section{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;padding:6rem 1.5rem;
+}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;
+  background:var(--dark);
+  overflow:hidden;
+  flex-direction:column;
+  text-align:center;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 30% 40%,rgba(90,15,25,0.7),transparent),
+    radial-gradient(ellipse 50% 60% at 75% 65%,rgba(60,10,20,0.5),transparent);
+}
+#hero-canvas{position:absolute;inset:0;}
+
+.hero-content{position:relative;z-index:3;}
+.hero-eyebrow{
+  font-size:0.62rem;letter-spacing:0.55em;text-transform:uppercase;
+  color:rgba(201,96,110,0.6);margin-bottom:2rem;
+  animation:fadeUp 1s ease 0.3s both;
+}
+.hero-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(4.5rem,16vw,11rem);
+  font-weight:300;font-style:italic;
+  line-height:0.95;letter-spacing:-0.01em;
+  background:linear-gradient(150deg,#f8ede8 20%,#c9606e 55%,#c9a96e 80%,#f8ede8 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  background-size:300%;
+  animation:shimmer 5s ease infinite, fadeUp 1s ease 0.1s both;
+}
+@keyframes shimmer{0%,100%{background-position:0%}50%{background-position:100%}}
+.hero-sub{
+  font-size:clamp(0.75rem,2vw,0.9rem);
+  color:var(--muted);letter-spacing:0.12em;
+  margin-top:1.5rem;
+  animation:fadeUp 1s ease 0.6s both;
+}
+.hero-scroll{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:0.6rem;
+  animation:fadeUp 1s ease 1.2s both;
+  cursor:pointer;
+  text-decoration:none;
+}
+.hero-scroll span{font-size:0.58rem;letter-spacing:0.4em;text-transform:uppercase;color:rgba(248,237,232,0.2);}
+.scroll-line{
+  width:1px;height:48px;
+  background:linear-gradient(to bottom,rgba(201,96,110,0.6),transparent);
+  animation:scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── REVEAL ELEMENTS ── */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.9s ease,transform 0.9s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity 0.9s ease,transform 0.9s ease;}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity 0.9s ease,transform 0.9s ease;}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+
+/* ── SECTION EYEBROW ── */
+.eyebrow{
+  font-size:0.6rem;letter-spacing:0.45em;text-transform:uppercase;
+  color:rgba(201,96,110,0.55);margin-bottom:1rem;display:block;
+}
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,6vw,4rem);
+  font-weight:300;font-style:italic;
+  line-height:1.1;color:var(--cream);
+}
+.section-title em{color:var(--rose);font-style:italic;}
+
+/* ── SORRY SECTION ── */
+#sorry{background:var(--dark2);}
+.sorry-card{
+  max-width:560px;width:100%;
+  background:linear-gradient(145deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));
+  border:1px solid rgba(201,96,110,0.18);
+  border-radius:28px;
+  padding:3.5rem 3rem;
+  backdrop-filter:blur(30px);
+  box-shadow:0 32px 80px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.06);
+  position:relative;
+  overflow:hidden;
+}
+.sorry-card::before{
+  content:'';position:absolute;top:-80px;right:-80px;
+  width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,96,110,0.12),transparent 70%);
+  pointer-events:none;
+}
+.sorry-text{
+  font-size:1rem;line-height:1.95;
+  color:rgba(248,237,232,0.65);margin-top:1.5rem;
+}
+.sorry-text strong{color:var(--cream);font-weight:400;}
+
+/* ── APPRECIATION SECTION ── */
+#appreciation{
+  background:var(--dark);
+  flex-direction:column;padding-top:5rem;padding-bottom:5rem;
+}
+.appr-header{text-align:center;margin-bottom:4rem;max-width:600px;}
+.appr-header p{color:var(--muted);font-size:0.95rem;margin-top:1rem;line-height:1.8;}
+
+.moments-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:1.5rem;
+  max-width:900px;width:100%;
+}
+
+.moment-card{
+  background:rgba(255,255,255,0.025);
+  border:1px solid rgba(201,96,110,0.12);
+  border-radius:20px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:transform 0.3s ease,box-shadow 0.3s ease,border-color 0.3s;
+  position:relative;
+}
+.moment-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 50px rgba(0,0,0,0.4),0 0 0 1px rgba(201,96,110,0.3);
+  border-color:rgba(201,96,110,0.35);
+}
+.moment-card:hover .moment-glow{opacity:1;}
+
+.moment-glow{
+  position:absolute;inset:0;
+  background:radial-gradient(circle at 50% 0%,rgba(201,96,110,0.08),transparent 60%);
+  opacity:0;transition:opacity 0.3s;pointer-events:none;
+}
+
+/* IMAGE SLOT */
+.img-slot{
+  width:100%;height:180px;
+  background:linear-gradient(135deg,rgba(201,96,110,0.06),rgba(201,96,110,0.02));
+  border-bottom:1px solid rgba(201,96,110,0.1);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  font-size:2.2rem;
+  transition:background 0.3s;
+}
+.img-slot img{
+  width:100%;height:100%;object-fit:cover;
+  opacity:0.85;
+  transition:opacity 0.3s,transform 0.5s ease;
+}
+.moment-card:hover .img-slot img{opacity:1;transform:scale(1.04);}
+
+.img-slot img{width:100%;height:100%;object-fit:cover;opacity:0.85;transition:opacity 0.3s,transform 0.5s ease;display:block;}
+.moment-card:hover .img-slot img{opacity:1;transform:scale(1.04);}
+.img-fallback{display:none;align-items:center;justify-content:center;font-size:2.2rem;width:100%;height:100%;}
+
+.img-placeholder-label{
+  position:absolute;bottom:0.5rem;right:0.7rem;
+  font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:rgba(201,96,110,0.4);
+  background:rgba(9,5,7,0.6);
+  padding:2px 6px;border-radius:4px;
+}
+
+.moment-body{padding:1.4rem 1.4rem 1.6rem;}
+.moment-icon{
+  font-size:1.4rem;margin-bottom:0.7rem;display:block;
+  transition:transform 0.3s;
+}
+.moment-card:hover .moment-icon{transform:scale(1.2);}
+.moment-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.15rem;font-weight:400;font-style:italic;
+  color:var(--cream);margin-bottom:0.5rem;
+}
+.moment-desc{
+  font-size:0.82rem;line-height:1.75;
+  color:rgba(248,237,232,0.45);
+}
+.moment-card:hover .moment-desc{color:rgba(248,237,232,0.65);}
+
+/* ── POPUP OVERLAY ── */
+#popup-overlay{
+  position:fixed;inset:0;z-index:2000;
+  background:rgba(9,5,7,0.92);
+  backdrop-filter:blur(16px);
+  display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;
+  opacity:0;pointer-events:none;
+  transition:opacity 0.4s ease;
+}
+#popup-overlay.open{opacity:1;pointer-events:all;}
+.popup-box{
+  max-width:520px;width:100%;
+  background:linear-gradient(145deg,rgba(30,12,18,0.98),rgba(20,8,12,0.98));
+  border:1px solid rgba(201,96,110,0.25);
+  border-radius:28px;
+  padding:3rem 2.5rem;
+  position:relative;
+  transform:scale(0.92) translateY(20px);
+  transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow:0 40px 100px rgba(0,0,0,0.7),0 0 0 1px rgba(201,96,110,0.08);
+  max-height:90vh;overflow-y:auto;
+}
+#popup-overlay.open .popup-box{transform:scale(1) translateY(0);}
+
+.popup-img{
+  width:100%;height:220px;
+  border-radius:16px;
+  object-fit:cover;
+  margin-bottom:1.5rem;
+  border:1px solid rgba(201,96,110,0.15);
+  display:block;
+}
+.popup-img-placeholder{
+  width:100%;height:160px;
+  border-radius:16px;
+  background:linear-gradient(135deg,rgba(201,96,110,0.08),rgba(201,96,110,0.03));
+  border:1px dashed rgba(201,96,110,0.25);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  margin-bottom:1.5rem;
+  gap:0.5rem;
+}
+.popup-img-placeholder span:first-child{font-size:2rem;}
+.popup-img-placeholder span:last-child{
+  font-size:0.62rem;letter-spacing:0.2em;
+  text-transform:uppercase;color:rgba(201,96,110,0.4);
+}
+
+.popup-close{
+  position:absolute;top:1.2rem;right:1.2rem;
+  background:rgba(201,96,110,0.1);
+  border:1px solid rgba(201,96,110,0.2);
+  color:rgba(248,237,232,0.5);
+  width:34px;height:34px;border-radius:50%;
+  font-size:1rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;line-height:1;
+}
+.popup-close:hover{background:rgba(201,96,110,0.25);color:var(--cream);}
+.popup-eyebrow{
+  font-size:0.58rem;letter-spacing:0.4em;text-transform:uppercase;
+  color:rgba(201,96,110,0.55);margin-bottom:0.8rem;
+}
+.popup-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.4rem,5vw,2rem);
+  font-style:italic;font-weight:300;
+  color:var(--cream);line-height:1.2;margin-bottom:1.2rem;
+}
+.popup-body{
+  font-size:0.9rem;line-height:1.9;
+  color:rgba(248,237,232,0.6);
+}
+.popup-body strong{color:var(--cream);font-weight:400;}
+.popup-heart{
+  text-align:center;font-size:1.4rem;
+  margin-top:1.5rem;animation:hb 2s ease-in-out infinite;
+}
+@keyframes hb{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+
+/* ── FUTURE SECTION ── */
+#future{
+  background:linear-gradient(180deg,var(--dark) 0%,var(--dark2) 100%);
+  flex-direction:column;
+}
+.future-inner{max-width:680px;width:100%;text-align:center;}
+.future-inner .section-title{margin-bottom:3.5rem;}
+
+.future-steps{
+  display:flex;flex-direction:column;gap:0;
+  position:relative;text-align:left;
+}
+.future-steps::before{
+  content:'';position:absolute;left:20px;top:0;bottom:0;width:1px;
+  background:linear-gradient(to bottom,transparent,rgba(201,96,110,0.25) 15%,rgba(201,96,110,0.25) 85%,transparent);
+}
+.future-step{
+  display:flex;gap:2rem;padding:1.6rem 0;
+  opacity:0;transform:translateX(-24px);
+  transition:opacity 0.7s ease,transform 0.7s ease;
+}
+.future-step.visible{opacity:1;transform:translateX(0);}
+.step-dot{
+  width:40px;height:40px;min-width:40px;
+  border-radius:50%;
+  background:rgba(201,96,110,0.08);
+  border:1px solid rgba(201,96,110,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;position:relative;z-index:1;
+  box-shadow:0 0 20px rgba(201,96,110,0.15);
+}
+.step-body{}
+.step-tag{
+  font-size:0.58rem;letter-spacing:0.4em;text-transform:uppercase;
+  color:rgba(201,96,110,0.5);margin-bottom:0.3rem;
+}
+.step-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.05rem,3vw,1.35rem);
+  font-style:italic;font-weight:300;
+  color:rgba(248,237,232,0.85);line-height:1.45;
+}
+
+/* ── FINALE ── */
+#finale{
+  background:var(--dark);
+  flex-direction:column;text-align:center;
+  min-height:100vh;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 60%,rgba(80,12,22,0.55),transparent),
+    var(--dark);
+}
+.finale-super{
+  font-size:0.6rem;letter-spacing:0.5em;text-transform:uppercase;
+  color:rgba(201,96,110,0.4);margin-bottom:2.5rem;
+}
+.finale-big{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3rem,10vw,7.5rem);
+  font-weight:300;font-style:italic;
+  line-height:1;color:var(--cream);
+  margin-bottom:0.5rem;
+}
+.finale-big em{
+  display:block;color:var(--rose);
+  font-size:0.7em;
+}
+.finale-caption{
+  font-size:0.78rem;letter-spacing:0.18em;
+  color:var(--muted);margin:1.5rem 0 3rem;
+}
+.ring-wrap{
+  display:flex;flex-direction:column;align-items:center;gap:0.8rem;
+}
+.ring-emoji{
+  font-size:3.8rem;cursor:pointer;
+  display:inline-block;
+  animation:floatHeart 3.5s ease-in-out infinite;
+  filter:drop-shadow(0 0 24px rgba(201,96,110,0.45));
+  transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  user-select:none;
+}
+.ring-emoji:hover{transform:scale(1.25) rotate(-8deg);}
+@keyframes floatHeart{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.ring-hint{
+  font-size:0.58rem;letter-spacing:0.35em;text-transform:uppercase;
+  color:rgba(248,237,232,0.15);animation:pulse 3s ease infinite;
+}
+@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
+
+/* ── IMAGE GUIDE SECTION ── */
+#img-guide{
+  background:var(--dark2);
+  flex-direction:column;
+  border-top:1px solid rgba(201,96,110,0.08);
+}
+.guide-box{
+  max-width:620px;width:100%;
+  background:rgba(201,96,110,0.04);
+  border:1px solid rgba(201,96,110,0.15);
+  border-radius:20px;padding:2.5rem 2rem;
+}
+.guide-box h3{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:1.5rem;font-weight:300;
+  color:var(--cream);margin-bottom:1.2rem;
+}
+.guide-step{
+  display:flex;gap:1rem;margin-bottom:1rem;
+  align-items:flex-start;
+}
+.guide-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;font-style:italic;
+  color:rgba(201,96,110,0.4);
+  min-width:2rem;line-height:1.2;
+}
+.guide-text{font-size:0.85rem;line-height:1.75;color:rgba(248,237,232,0.55);}
+.guide-text code{
+  background:rgba(201,96,110,0.1);
+  border:1px solid rgba(201,96,110,0.2);
+  padding:0 5px;border-radius:4px;
+  font-size:0.78rem;color:var(--rose);font-family:monospace;
+}
+
+/* ── CONFETTI ── */
+#cc{position:fixed;inset:0;pointer-events:none;z-index:3000;}
+
+/* ── MOBILE ── */
+@media(max-width:600px){
+  .sorry-card{padding:2.2rem 1.6rem;}
+  .popup-box{padding:2rem 1.5rem;}
+  .moments-grid{grid-template-columns:1fr;}
+  .future-steps::before{left:16px;}
+  .step-dot{width:32px;height:32px;min-width:32px;}
+  .future-step{gap:1.2rem;}
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+<div class="grain"></div>
+<canvas id="cc"></canvas>
+
+<nav id="top-nav">
+  <span class="logo">for laavanya</span>
+  <span class="chapter-label" id="chapter-label">a love letter</span>
+</nav>
+
+<!-- ═══════════════════════════════════ HERO ═══════════════════════════════════ -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">a letter from your love</div>
+    <div class="hero-name">Laavanya</div>
+    <div class="hero-sub">this is for you. take your time.</div>
+  </div>
+  <a class="hero-scroll" href="#sorry">
+    <span>begin</span>
+    <div class="scroll-line"></div>
+  </a>
+</section>
+
+<!-- ═══════════════════════════════════ SORRY ═══════════════════════════════════ -->
+<section id="sorry">
+  <div class="sorry-card reveal">
+    <span class="eyebrow">before anything else</span>
+    <div class="section-title">I'm sorry.<br>And I <em>mean</em> it.</div>
+    <p class="sorry-text">
+      Yesterday, my fear spoke louder than my heart.<br><br>
+      What I said - asking you to leave, to walk away - those words were not mine. They came from the most broken, frightened part of me. The part that is still quietly healing. <strong>Not from the love I have for you, which is the only real thing I know.</strong><br><br>
+      You did not deserve even one of those words. I am so sorry.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ APPRECIATION ═══════════════════════════════════ -->
+<section id="appreciation">
+  <div class="appr-header reveal">
+    <span class="eyebrow">chapter two</span>
+    <div class="section-title">The things you do.<br>That I <em>never</em> say enough.</div>
+    <p>I need to stop. And just tell you. Every small thing you do - I see it. I feel it. And I am so grateful for all of it.</p>
+  </div>
+
+  <div class="moments-grid" id="moments-grid">
+
+    <!-- CARD 1 -->
+    <div class="moment-card reveal" onclick="openPopup(0)">
+      <div class="moment-glow"></div>
+      <div class="img-slot"><img src="media/kiss.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="img-fallback">💋</span></div>
+      <div class="moment-body">
+        <span class="moment-icon">💋</span>
+        <div class="moment-title">Kisses on my forehead</div>
+        <div class="moment-desc">The quietest way you say "I love you."</div>
+      </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="moment-card reveal" onclick="openPopup(1)">
+      <div class="moment-glow"></div>
+      <div class="img-slot"><img src="media/hug.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="img-fallback">🫂</span></div>
+      <div class="moment-body">
+        <span class="moment-icon">🫂</span>
+        <div class="moment-title">Hugging me when I'm low</div>
+        <div class="moment-desc">You hold me before I even ask.</div>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="moment-card reveal" onclick="openPopup(2)">
+      <div class="moment-glow"></div>
+      <div class="img-slot"><img src="media/rant.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="img-fallback">👂</span></div>
+      <div class="moment-body">
+        <span class="moment-icon">👂</span>
+        <div class="moment-title">Letting me rant</div>
+        <div class="moment-desc">You listen. Every single time.</div>
+      </div>
+    </div>
+
+    <!-- CARD 4 -->
+    <div class="moment-card reveal" onclick="openPopup(3)">
+      <div class="moment-glow"></div>
+      <div class="img-slot"><img src="media/cooking.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="img-fallback">🍳</span></div>
+      <div class="moment-body">
+        <span class="moment-icon">🍳</span>
+        <div class="moment-title">Cooking when I'm running late</div>
+        <div class="moment-desc">Love in the most practical, beautiful form.</div>
+      </div>
+    </div>
+
+    <!-- CARD 5 -->
+    <div class="moment-card reveal" onclick="openPopup(4)">
+      <div class="moment-glow"></div>
+      <div class="img-slot"><img src="media/gifts.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="img-fallback">🎁</span></div>
+      <div class="moment-body">
+        <span class="moment-icon">🎁</span>
+        <div class="moment-title">The smallest gifts</div>
+        <div class="moment-desc">A Bueno. A photo frame. You remember everything.</div>
+      </div>
+    </div>
+
+    <!-- CARD 6 -->
+    <div class="moment-card reveal" onclick="openPopup(5)">
+      <div class="moment-glow"></div>
+      <div class="img-slot"><img src="media/graduation.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="img-fallback">🎓</span></div>
+      <div class="moment-body">
+        <span class="moment-icon">🎓</span>
+        <div class="moment-title">My graduation day</div>
+        <div class="moment-desc">The way you looked after my parents. I will never forget it.</div>
+      </div>
+    </div>
+
+    <!-- CARD 7 -->
+    <div class="moment-card reveal" onclick="openPopup(6)">
+      <div class="moment-glow"></div>
+      <div class="img-slot"><img src="media/family.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="img-fallback">👨‍👩‍👧</span></div>
+      <div class="moment-body">
+        <span class="moment-icon">👨‍👩‍👧</span>
+        <div class="moment-title">Bonding with my mum & dad</div>
+        <div class="moment-desc">You didn't just love me. You chose my family too.</div>
+      </div>
+    </div>
+
+    <!-- CARD 8 -->
+    <div class="moment-card reveal" onclick="openPopup(7)">
+      <div class="moment-glow"></div>
+      <div class="img-slot"><img src="media/together.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="img-fallback">🌹</span></div>
+      <div class="moment-body">
+        <span class="moment-icon">🌹</span>
+        <div class="moment-title">Not letting me go</div>
+        <div class="moment-desc">On the hardest days - you stayed. You always stay.</div>
+      </div>
+    </div>
+
+    <!-- CARD 9 -->
+    <div class="moment-card reveal" onclick="openPopup(8)">
+      <div class="moment-glow"></div>
+      <div class="img-slot"><img src="media/care.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="img-fallback">✨</span></div>
+      <div class="moment-body">
+        <span class="moment-icon">✨</span>
+        <div class="moment-title">Checking on me when I spiral</div>
+        <div class="moment-desc">You notice before I say a word. That is everything.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ FUTURE ═══════════════════════════════════ -->
+<section id="future">
+  <div class="future-inner">
+    <div class="reveal">
+      <span class="eyebrow">chapter three</span>
+      <div class="section-title">What I see<br>when I look <em>forward.</em></div>
+    </div>
+    <div class="future-steps" id="future-steps">
+      <div class="future-step">
+        <div class="step-dot">🌸</div>
+        <div class="step-body">
+          <div class="step-tag">right now</div>
+          <div class="step-text">Healing together. Choosing each other. Growing into something neither of us fully imagined yet.</div>
+        </div>
+      </div>
+      <div class="future-step">
+        <div class="step-dot">💍</div>
+        <div class="step-body">
+          <div class="step-tag">one day soon</div>
+          <div class="step-text">I want to get down on one knee and ask you a question. My whole heart already knows the answer I'm hoping for.</div>
+        </div>
+      </div>
+      <div class="future-step">
+        <div class="step-dot">🕊️</div>
+        <div class="step-body">
+          <div class="step-tag">our wedding</div>
+          <div class="step-text">You in something beautiful. Me barely holding it together. Both of us saying forever, out loud, in front of everyone we love.</div>
+        </div>
+      </div>
+      <div class="future-step">
+        <div class="step-dot">🏡</div>
+        <div class="step-body">
+          <div class="step-tag">our home</div>
+          <div class="step-text">Somewhere that smells like your cooking and sounds like your laugh. Where I get to fall asleep next to you every night.</div>
+        </div>
+      </div>
+      <div class="future-step">
+        <div class="step-dot">♾️</div>
+        <div class="step-body">
+          <div class="step-tag">till the very end</div>
+          <div class="step-text">Still you. Still us. Still the only place I ever want to be.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ FINALE ═══════════════════════════════════ -->
+<section id="finale">
+  <div class="finale-super reveal">the only truth i know</div>
+  <div class="finale-big reveal">
+    I only see
+    <em>you.</em>
+  </div>
+  <div class="finale-caption reveal">till the end of everything</div>
+  <div class="ring-wrap reveal">
+    <div class="ring-emoji" onclick="celebrate()" title="tap me">💍</div>
+    <div class="ring-hint">tap the ring</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ POPUP ═══════════════════════════════════ -->
+<div id="popup-overlay" onclick="handleOverlayClick(event)">
+  <div class="popup-box" id="popup-box">
+    <button class="popup-close" onclick="closePopup()">✕</button>
+    <div id="popup-content"></div>
+  </div>
+</div>
+
+<script>
+// ── POPUP DATA ──
+const moments = [
+  {
+    icon:'💋',
+    title:'Kisses on my forehead',
+    tag:'the quiet ones',
+    img:'media/kiss.png',
+    text:`Every time you kiss my forehead, you don't say a word - and that is exactly why it means everything. It is the softest, most certain way of saying <strong>"I've got you."</strong> I feel it in my whole chest. I always will.`
+  },
+  {
+    icon:'🫂',
+    title:'Hugging me when I\'m low',
+    tag:'before i even ask',
+    img:'media/hug.png',
+    text:`You don't wait for me to ask. You just know. You wrap your arms around me and something inside me settles. <strong>You are the only person in the world who can do that.</strong> The only one.`
+  },
+  {
+    icon:'👂',
+    title:'Letting me rant',
+    tag:'your patience',
+    img:'media/rant.png',
+    text:`You sit there. You listen. You don't rush me, you don't dismiss me, you don't make me feel like too much. <strong>You make me feel heard.</strong> That is one of the rarest things a person can give another person, and you give it to me every time.`
+  },
+  {
+    icon:'🍳',
+    title:'Cooking when I\'m running late',
+    tag:'love in action',
+    img:'media/cooking.png',
+    text:`I come home stressed, hungry, exhausted - and there is food waiting. You made sure I ate. <strong>That is love in its most real, most grounded form.</strong> Not the grand gestures. This. You doing this.`
+  },
+  {
+    icon:'🎁',
+    title:'The smallest gifts',
+    tag:'a bueno. a photo frame.',
+    img:'media/gifts.png',
+    text:`A Bueno bar. A photo frame with us in it. The tiniest things that tell me <strong>you were thinking of me when I wasn't even there.</strong> I have not said thank you enough for those. Thank you. I treasure every single one.`
+  },
+  {
+    icon:'🎓',
+    title:'My graduation day',
+    tag:'the day i fell even harder',
+    img:'media/graduation.png',
+    text:`The way you looked after my parents that day. Made them feel comfortable, looked out for them, made sure they were okay. <strong>You didn't have to. But you did.</strong> That was the moment I knew you weren't just here for me. You were here for all of us.`
+  },
+  {
+    icon:'👨‍👩‍👧',
+    title:'Bonding with Mum & Dad',
+    tag:'you chose my whole family',
+    img:'media/family.png',
+    text:`You put in genuine effort. Not for show - for real. Time, care, intention. Building something with them. <strong>You chose my family the way I would want someone to.</strong> I am so proud to have you. I hope you know that.`
+  },
+  {
+    icon:'🌹',
+    title:'Not letting me go',
+    tag:'on the hardest days',
+    img:'media/together.png',
+    text:`When things got rough - when I made it hard to stay - you didn't leave. <strong>You stayed.</strong> That is not a small thing. That is one of the biggest things anyone has ever done for me. I do not take that lightly. Not for a second.`
+  },
+  {
+    icon:'✨',
+    title:'Checking on me when I spiral',
+    tag:'you see me',
+    img:'media/care.png',
+    text:`Before I even say anything. Before I admit I am not okay. You notice. You ask. You show up with <strong>everything I need without me having to ask.</strong> I am so lucky. I am so, so lucky to be loved by you.`
+  }
+];
+
+function openPopup(i) {
+  const m = moments[i];
+  const imgHtml = m.img
+    ? `<img src="${m.img}" class="popup-img" alt="${m.title}">`
+    : `<div class="popup-img-placeholder"><span>${m.icon}</span><span>your photo here</span></div>`;
+
+  document.getElementById('popup-content').innerHTML = `
+    ${imgHtml}
+    <div class="popup-eyebrow">${m.tag}</div>
+    <div class="popup-title">${m.title}</div>
+    <div class="popup-body">${m.text}</div>
+    <div class="popup-heart">♥</div>
+  `;
+  document.getElementById('popup-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePopup() {
+  document.getElementById('popup-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('popup-overlay')) closePopup();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePopup(); });
+
+// ── SCROLL PROGRESS + CHAPTER LABEL ──
+const chapters = {
+  'hero': 'a love letter',
+  'sorry': 'chapter one — i\'m sorry',
+  'appreciation': 'chapter two — what you do',
+  'future': 'chapter three — what i see',
+  'finale': 'the only truth'
+};
+
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  const total = document.body.scrollHeight - window.innerHeight;
+  document.getElementById('progress-bar').style.width = (scrolled / total * 100) + '%';
+
+  // update chapter label
+  Object.keys(chapters).forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    if (rect.top <= 80 && rect.bottom > 80) {
+      document.getElementById('chapter-label').textContent = chapters[id];
+    }
+  });
+
+  // reveal elements
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.88) el.classList.add('visible');
+  });
+
+  // timeline steps
+  document.querySelectorAll('.future-step').forEach((el, i) => {
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.85) {
+      setTimeout(() => el.classList.add('visible'), i * 150);
+    }
+  });
+});
+
+// trigger on load too
+setTimeout(() => window.dispatchEvent(new Event('scroll')), 100);
+
+// ── HERO CANVAS - floating particles ──
+const hc = document.getElementById('hero-canvas');
+const hctx = hc.getContext('2d');
+function resizeHC() { hc.width = innerWidth; hc.height = innerHeight; }
+resizeHC(); window.addEventListener('resize', resizeHC);
+
+const particles = [];
+for (let i = 0; i < 55; i++) {
+  particles.push({
+    x: Math.random() * innerWidth,
+    y: Math.random() * innerHeight,
+    size: 0.5 + Math.random() * 1.5,
+    alpha: 0.1 + Math.random() * 0.4,
+    speed: 0.15 + Math.random() * 0.4,
+    drift: (Math.random() - 0.5) * 0.3,
+    pulse: Math.random() * Math.PI * 2
+  });
+}
+
+function drawHero() {
+  hctx.clearRect(0, 0, hc.width, hc.height);
+  particles.forEach(p => {
+    p.y -= p.speed; p.x += p.drift; p.pulse += 0.02;
+    const a = p.alpha * (0.6 + 0.4 * Math.sin(p.pulse));
+    if (p.y < -10) { p.y = innerHeight + 10; p.x = Math.random() * innerWidth; }
+    hctx.beginPath();
+    hctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    hctx.fillStyle = `rgba(201,96,110,${a})`;
+    hctx.fill();
+  });
+  requestAnimationFrame(drawHero);
+}
+drawHero();
+
+// ── CONFETTI ──
+const cc = document.getElementById('cc');
+const cctx = cc.getContext('2d');
+cc.width = innerWidth; cc.height = innerHeight;
+window.addEventListener('resize', () => { cc.width = innerWidth; cc.height = innerHeight; });
+
+function celebrate() {
+  const pieces = [];
+  const cols = ['#c9606e','#f8ede8','#c9a96e','#f7dde0','#ffffff','#7a2d38','#e8c4c8'];
+  for (let i = 0; i < 160; i++) {
+    pieces.push({
+      x: innerWidth / 2, y: innerHeight * 0.8,
+      vx: (Math.random() - 0.5) * 20,
+      vy: -(6 + Math.random() * 14),
+      w: 5 + Math.random() * 7, h: 5 + Math.random() * 12,
+      col: cols[Math.floor(Math.random() * cols.length)],
+      rot: Math.random() * 360, vr: (Math.random() - 0.5) * 12,
+      alpha: 1, gravity: 0.35
+    });
+  }
+  for (let i = 0; i < 40; i++) {
+    pieces.push({
+      x: Math.random() * innerWidth, y: innerHeight + 20,
+      vx: (Math.random() - 0.5) * 1.5, vy: -(1.5 + Math.random() * 3.5),
+      heart: true, size: 14 + Math.random() * 20,
+      col: cols[Math.floor(Math.random() * 2)],
+      alpha: 1, gravity: -0.015, rot: 0, vr: 0, w: 0, h: 0
+    });
+  }
+  let af;
+  function draw() {
+    cctx.clearRect(0, 0, cc.width, cc.height);
+    let any = false;
+    pieces.forEach(p => {
+      if (p.alpha <= 0) return; any = true;
+      p.vy += p.gravity; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.alpha -= 0.009;
+      cctx.save(); cctx.globalAlpha = Math.max(0, p.alpha);
+      if (p.heart) {
+        cctx.font = p.size + 'px serif'; cctx.fillStyle = p.col;
+        cctx.fillText('♥', p.x, p.y);
+      } else {
+        cctx.translate(p.x, p.y); cctx.rotate(p.rot * Math.PI / 180);
+        cctx.fillStyle = p.col; cctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+      }
+      cctx.restore();
+    });
+    if (any) af = requestAnimationFrame(draw);
+    else cctx.clearRect(0, 0, cc.width, cc.height);
+  }
+  cancelAnimationFrame(af); draw();
+}
+
+// ── 3D TILT on moment cards ──
+document.querySelectorAll('.moment-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    card.style.transform = `translateY(-6px) rotateY(${x * 10}deg) rotateX(${-y * 8}deg)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+</script>
+</body>
+</html>
